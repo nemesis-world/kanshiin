@@ -1,13 +1,19 @@
-import type { V2_MetaFunction } from "@vercel/remix";
+import type { LoaderArgs } from "@vercel/remix";
+import { urlLoader } from "~/utils/urlLoader";
 
-export const config = { runtime: "edge" };
+const region = "kix1";
 
-export const meta: V2_MetaFunction = () => [{ title: "Remix@Edge | New Remix App" }];
+export const config = {
+  runtime: "edge",
+  regions: [region],
+};
 
-export default function Edge() {
-  return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix@Edge</h1>
-    </div>
-  );
+export async function loader({ request }: LoaderArgs) {
+  return await urlLoader(request.url, request.headers);
+}
+
+export function headers() {
+  return {
+    "x-edge-region": region,
+  };
 }

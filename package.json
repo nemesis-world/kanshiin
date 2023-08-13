@@ -5,18 +5,24 @@
     "build": "remix build",
     "dev": "remix dev",
     "start": "remix-serve build",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "supabase-type": "npx supabase gen types typescript --project-id lbudoylchafcekkvktyd > supabase.ts"
   },
   "dependencies": {
     "@remix-run/css-bundle": "^1.18.0",
     "@remix-run/node": "^1.18.0",
     "@remix-run/react": "^1.18.0",
     "@remix-run/serve": "^1.18.0",
+    "@supabase/supabase-js": "^2.32.0",
+    "@types/ping": "^0.4.1",
     "@vercel/analytics": "^0.1.11",
     "@vercel/remix": "^1.18.0",
     "isbot": "^3.6.8",
+    "ping": "^0.4.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "supabase": "^1.83.7",
+    "tailwindcss": "^3.3.3"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.18.0",
