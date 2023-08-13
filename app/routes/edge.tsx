@@ -1,11 +1,9 @@
 import type { LoaderArgs } from "@vercel/remix";
 import { urlLoader } from "~/utils/urlLoader";
 
-const region = "kix1";
-
 export const config = {
   runtime: "edge",
-  regions: [region],
+  regions: ["kix1"],
 };
 
 export async function loader({ request }: LoaderArgs) {
@@ -14,6 +12,7 @@ export async function loader({ request }: LoaderArgs) {
 
 export function headers() {
   return {
-    "x-edge-region": region,
+    "x-edge-region": "kix1",
+    "x-edge-city": "Osaka",
   };
 }

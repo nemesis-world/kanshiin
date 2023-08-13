@@ -7,6 +7,8 @@ export async function urlLoader(url: string, headers: Headers) {
   const theURL = new URL(url);
   const token = theURL.searchParams.get("token") || "";
   const parsedId = parseVercelId(headers.get("x-vercel-id"));
+  console.log(parsedId);
+
   if (
     token !== process.env.SUPABASE_UPDATE_TOKEN &&
     parsedId.proxyRegion !== "dev1"
@@ -34,5 +36,5 @@ export async function urlLoader(url: string, headers: Headers) {
     }
   });
 
-  return `Hi from ${regions[parsedId.proxyRegion]}!`;
+  return `Hi from ${regions[parsedId.computeRegion]}!`;
 }
