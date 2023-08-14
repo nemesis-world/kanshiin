@@ -7,11 +7,10 @@ export async function urlLoader(url: string, headers: Headers) {
   const theURL = new URL(url);
   const token = theURL.searchParams.get("token") || "";
   const parsedId = parseVercelId(headers.get("x-vercel-id"));
-  console.log(parsedId);
 
   if (
     token !== process.env.SUPABASE_UPDATE_TOKEN &&
-    parsedId.proxyRegion !== "dev1"
+    parsedId.computeRegion !== "dev1"
   ) {
     return new Response("Unauthorized", { status: 401 });
   }
@@ -19,19 +18,30 @@ export async function urlLoader(url: string, headers: Headers) {
 
   supbasedata?.data?.forEach(async (website) => {
     const websiteStatus = await checkWebsiteStatus(website.hostname);
-
     const status = websiteStatus === 200 ? 1 : 2;
+
     if (status !== website.status_code) {
-      const { error } = await supabase
+      const region =
+        Object.keys(regions).find(
+          (key) => regions[key] === parsedId.computeRegion
+        ) || "dev1";
+      const updateData = {
+        status_code: status,
+        [region]: parsedId.computeRegion === region ? true : null,
+      };
+
+      const query = supabase
         .from("monitors")
-        .update({
-          status_code: status,
-        })
+        .update(updateData)
         .eq("id", website.id)
         .select();
 
+      const { data, error } = await query;
+
       if (error) {
         console.log(error);
+      } else {
+        console.log(data);
       }
     }
   });

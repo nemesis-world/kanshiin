@@ -44,25 +44,37 @@ export interface Database {
         Row: {
           created_at: string | null
           cron_interval_ir: number
+          dev1: boolean
+          dub1: boolean
           hostname: string
           id: number
+          kix1: boolean
           name: string
+          sfo1: boolean
           status_code: number | null
         }
         Insert: {
           created_at?: string | null
           cron_interval_ir: number
+          dev1?: boolean
+          dub1?: boolean
           hostname: string
           id?: number
+          kix1?: boolean
           name: string
+          sfo1?: boolean
           status_code?: number | null
         }
         Update: {
           created_at?: string | null
           cron_interval_ir?: number
+          dev1?: boolean
+          dub1?: boolean
           hostname?: string
           id?: number
+          kix1?: boolean
           name?: string
+          sfo1?: boolean
           status_code?: number | null
         }
         Relationships: [
