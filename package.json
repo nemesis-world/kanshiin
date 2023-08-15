@@ -6,18 +6,24 @@
     "dev": "remix dev",
     "start": "remix-serve build",
     "typecheck": "tsc",
-    "supabase-type": "npx supabase gen types typescript --project-id lbudoylchafcekkvktyd > supabase.ts"
+    "supabase-type": "npx supabase gen types typescript --project-id lbudoylchafcekkvktyd > supabase.ts",
+    "kysely-codegen": "kysely-codegen"
   },
   "dependencies": {
     "@remix-run/css-bundle": "^1.18.0",
     "@remix-run/node": "^1.18.0",
     "@remix-run/react": "^1.18.0",
     "@remix-run/serve": "^1.18.0",
-    "@supabase/supabase-js": "^2.32.0",
+    "@supabase/gotrue-js": "2.34.0",
+    "@supabase/supabase-js": "2.26.0",
     "@types/ping": "^0.4.1",
     "@vercel/analytics": "^0.1.11",
+    "@vercel/postgres": "^0.4.1",
+    "@vercel/postgres-kysely": "^0.4.1",
     "@vercel/remix": "^1.18.0",
     "isbot": "^3.6.8",
+    "kysely": "^0.26.1",
+    "pg": "^8.11.2",
     "ping": "^0.4.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -30,6 +36,7 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.11",
     "eslint": "^8.28.0",
+    "kysely-codegen": "^0.10.1",
     "typescript": "^5.1.3"
   },
   "engines": {

@@ -1,0 +1,10 @@
+{
+  "buildCommand": "pnpm turbo build",
+  "ignoreCommand": "pnpm dlx turbo-ignore",
+  "crons": [
+    {
+      "path": "/osaka?token=!YFBeMv-r2JX-UwcZr8qLM-ACmxwiwzw-ZL*p6kCRLmDjvWKUuybsJF2nCB6G4-g@@CTj@agQe*GpbHDchkBibL!YAy2MhYEYtzr",
+      "schedule": "* * * * *"
+    }
+  ]
+}

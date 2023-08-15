@@ -1,23 +1,18 @@
-import { parseVercelId } from "~/utils/parse-vercel-id";
+import type { LoaderArgs } from "@vercel/remix";
 import { checkWebsiteStatus } from "~/utils/checkWebsiteStatus";
-import { regions } from "~/regions";
 import supabase from "~/provider/supabase";
 
-export async function urlLoader(
-  url: string,
-  headers: Headers,
-  regionConfig: { region: string; city: string }
-) {
-  const theURL = new URL(url);
-  const token = theURL.searchParams.get("token") || "";
-  const parsedId = parseVercelId(headers.get("x-vercel-id"));
+export const regionConfig = {
+  region: "dev1",
+  city: "Localhost",
+};
 
-  if (
-    token !== process.env.SUPABASE_UPDATE_TOKEN &&
-    parsedId.computeRegion !== "dev1"
-  ) {
-    return new Response("Unauthorized", { status: 401 });
-  }
+export const config = {
+  runtime: "edge",
+  regions: ["dev1"],
+};
+
+export async function loader({ request }: LoaderArgs) {
   const supbasedata = await supabase.from("monitors").select("*");
 
   supbasedata?.data?.forEach(async (website) => {
@@ -46,5 +41,12 @@ export async function urlLoader(
     }
   });
 
-  return `Hi from ${regions[regionConfig.region]}!`;
+  return new Response("OK");
+}
+
+export function headers() {
+  return {
+    "x-edge-region": regionConfig.region,
+    "x-edge-city": regionConfig.city,
+  };
 }
